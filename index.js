@@ -82,9 +82,9 @@ function layLocal() {
   var data = localStorage.getItem("arrNhanVien");
   if (data) {
     arrNhanVien = JSON.parse(data);
+    renderNhanVien();
   }
 }
-
 //hàm lấy local chạy
 layLocal();
 
@@ -103,23 +103,30 @@ function layThongTinNhanVien(taiKhoan) {
   document.getElementById("myModal").classList.add("show");
   document.getElementById("myModal").style.display = "inline-block";
   document.getElementById("txtTaiKhoan").readOnly = true;
+  var btnDong = document.getElementById("btnDong");
+  btnDong.addEventListener("click", function () {
+    var modal = document.getElementById("myModal");
+    modal.style.display = "none";
+  });
 }
 //cập nhật thông tin nhan viên
 function capNhatThongTinNhanVien() {
-  var nhanVien = new NhanVien();
-  for (var i = 0; i < arrInput.length; i++) {
-    var valueInput = document.getElementById(arrInput[i].value);
-    nhanVien[arrInput[i]] = valueInput;
+  var nhanVien = new NhanVien() ;
+  console.log(nhanVien);
+  for(var i = 0; i < arrInput.length; i++) {
+    var valueInput = document.getElementById(arrInput[i]).value ;
+    nhanVien[arrInput[i]] = valueInput
   }
-  var index = -1;
-  for (var z = 0; z < arrNhanVien.length; z++) {
-    if (arrNhanVien[z].txtTaiKhoan == nhanVien.txtTaiKhoan) {
-      index = z;
+  console.log(valueInput)
+  var index = -1 ;
+  for(var z = 0; z < arrNhanVien.length; z++) {
+    if(arrNhanVien[z].txtTaiKhoan == nhanVien.txtTaiKhoan) {
+      index = z ;
     }
   }
   arrNhanVien[index] = nhanVien;
   document.getElementById("formControl").reset();
-  document.getElementById("txtTaiKhoan").readOnly = false;
+  document.getElementById("txtTaiKhoan").readOnly = false ;
   renderNhanVien();
   luuLocal();
 }
