@@ -35,7 +35,8 @@ function themNhanVien() {
     checkEmail("txtEmail", "tbEmail") &
     checkPassword("txtPassword", "tbMatKhau") &
     checkNgayThang("txtNgayVoLam", "tbNgay") &
-    checkGioLam("txtGioLam", "tbGiolam");
+    checkGioLam("txtGioLam", "tbGiolam") &
+    checkMoney("txtLuongCoBan", "tbLuongCB");
   if (valid) {
     arrNhanVien.push(nhanVien);
     //render ra giao diện khi thêm nhân viên
@@ -134,21 +135,35 @@ function layThongTinNhanVien(taiKhoan) {
 function capNhatThongTinNhanVien() {
   var nhanVien = new NhanVien();
   console.log(nhanVien);
+  var valid = true;
   for (var i = 0; i < arrInput.length; i++) {
+    valid &= checkInputRong(arrInput[i], arrThongBao[i]);
     var valueInput = document.getElementById(arrInput[i]).value;
     nhanVien[arrInput[i]] = valueInput;
   }
-  console.log(valueInput);
+  valid &=
+    checkTenNhanVien("txtHoTen", "tbTen") &
+    checkTaiKhoan("txtTaiKhoan", "tbTKNV") &
+    checkEmail("txtEmail", "tbEmail") &
+    checkPassword("txtPassword", "tbMatKhau") &
+    checkNgayThang("txtNgayVoLam", "tbNgay") &
+    checkGioLam("txtGioLam", "tbGiolam") &
+    checkMoney("txtLuongCoBan", "tbLuongCB");
+  // console.log(valueInput);
   var index = -1;
   for (var z = 0; z < arrNhanVien.length; z++) {
     if (arrNhanVien[z].txtTaiKhoan == nhanVien.txtTaiKhoan) {
       index = z;
     }
   }
-  arrNhanVien[index] = nhanVien;
-  document.getElementById("formControl").reset();
-  document.getElementById("txtTaiKhoan").readOnly = false;
-  renderNhanVien();
-  luuLocal();
+  if(valid) {
+    arrNhanVien[index] = nhanVien;
+    console.log(arrNhanVien[index])
+    document.getElementById("formControl").reset();
+    document.getElementById("txtTaiKhoan").readOnly = false;
+    renderNhanVien();
+    luuLocal();
+  }
 }
 document.getElementById("btnCapNhat").onclick = capNhatThongTinNhanVien;
+
