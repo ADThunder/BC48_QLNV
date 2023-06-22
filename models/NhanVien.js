@@ -20,13 +20,13 @@ function NhanVien() {
   }
   this.xepLoai = function () {
     if(this.txtGioLam >= 192 ) {
-        return "Nhân viên xuất sắc"
+        return "Xuất sắc"
     } else if (this.txtGioLam >= 176) {
-        return "Nhân viên giỏi"
+        return "Giỏi"
     } else if (this.txtGioLam >= 160) {
-        return "Nhân viên khá "
+        return "Khá "
     } else if (this.txtGioLam < 160) {
-        return "Nhân viên trung bình"
+        return "Trung bình"
     }
   }
 }

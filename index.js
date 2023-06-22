@@ -9,20 +9,41 @@ var arrInput = [
   "txtChucVu",
   "txtGioLam",
 ];
+var arrThongBao = [
+  "tbTKNV",
+  "tbTen",
+  "tbEmail",
+  "tbMatKhau",
+  "tbNgay",
+  "tbLuongCB",
+  "tbChucVu",
+  "tbGiolam",
+];
 //---Thêm nhân viên---//
 function themNhanVien() {
+  event.preventDefault;
   var nhanVien = new NhanVien();
+  var valid = true;
   for (var i = 0; i < arrInput.length; i++) {
+    valid &= checkInputRong(arrInput[i], arrThongBao[i]);
     var giaTri = document.getElementById(arrInput[i]).value;
     nhanVien[arrInput[i]] = giaTri;
   }
-  arrNhanVien.push(nhanVien);
-
-  //render ra giao diện khi thêm nhân viên
-  renderNhanVien();
-  document.getElementById("formControl").reset();
-  //lưu localStorage khi thêm nhân viên
-  luuLocal();
+  valid &=
+    checkTenNhanVien("txtHoTen", "tbTen") &
+    checkTaiKhoan("txtTaiKhoan", "tbTKNV") &
+    checkEmail("txtEmail", "tbEmail") &
+    checkPassword("txtPassword", "tbMatKhau") &
+    checkNgayThang("txtNgayVoLam", "tbNgay") &
+    checkGioLam("txtGioLam", "tbGiolam");
+  if (valid) {
+    arrNhanVien.push(nhanVien);
+    //render ra giao diện khi thêm nhân viên
+    renderNhanVien();
+    document.getElementById("formControl").reset();
+    //lưu localStorage khi thêm nhân viên
+    luuLocal();
+  }
 }
 document.getElementById("btnThemNV").onclick = themNhanVien;
 
@@ -48,7 +69,7 @@ function renderNhanVien() {
         <button onclick ="xoaNhanVien(${
           newNhanVien.txtTaiKhoan
         })" class="btn btn-danger">Xoá</button>
-        <button onclick="layThongTinNhanVien(${
+        <button id="btnSua" onclick="layThongTinNhanVien(${
           newNhanVien.txtTaiKhoan
         })" class="btn btn-warning">Chỉnh sửa</button>
 	    </tr> `;
@@ -111,22 +132,22 @@ function layThongTinNhanVien(taiKhoan) {
 }
 //cập nhật thông tin nhan viên
 function capNhatThongTinNhanVien() {
-  var nhanVien = new NhanVien() ;
+  var nhanVien = new NhanVien();
   console.log(nhanVien);
-  for(var i = 0; i < arrInput.length; i++) {
-    var valueInput = document.getElementById(arrInput[i]).value ;
-    nhanVien[arrInput[i]] = valueInput
+  for (var i = 0; i < arrInput.length; i++) {
+    var valueInput = document.getElementById(arrInput[i]).value;
+    nhanVien[arrInput[i]] = valueInput;
   }
-  console.log(valueInput)
-  var index = -1 ;
-  for(var z = 0; z < arrNhanVien.length; z++) {
-    if(arrNhanVien[z].txtTaiKhoan == nhanVien.txtTaiKhoan) {
-      index = z ;
+  console.log(valueInput);
+  var index = -1;
+  for (var z = 0; z < arrNhanVien.length; z++) {
+    if (arrNhanVien[z].txtTaiKhoan == nhanVien.txtTaiKhoan) {
+      index = z;
     }
   }
   arrNhanVien[index] = nhanVien;
   document.getElementById("formControl").reset();
-  document.getElementById("txtTaiKhoan").readOnly = false ;
+  document.getElementById("txtTaiKhoan").readOnly = false;
   renderNhanVien();
   luuLocal();
 }
