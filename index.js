@@ -167,3 +167,5 @@ function capNhatThongTinNhanVien() {
 }
 document.getElementById("btnCapNhat").onclick = capNhatThongTinNhanVien;
 
+
+
