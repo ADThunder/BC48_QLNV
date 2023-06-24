@@ -49,14 +49,17 @@ function themNhanVien() {
 document.getElementById("btnThemNV").onclick = themNhanVien;
 
 //---render nhân viên ---//
-function renderNhanVien() {
+function renderNhanVien(arrNewNhanVien) {
+  console.log(arrNewNhanVien);
+  if (arrNewNhanVien == undefined) {
+    arrNewNhanVien = arrNhanVien;
+  }
+
   var content = "";
-  for (var i = 0; i < arrNhanVien.length; i++) {
-    var nhanVien = arrNhanVien[i];
+  for (var i = 0; i < arrNewNhanVien.length; i++) {
+    var nhanVien = arrNewNhanVien[i];
     var newNhanVien = new NhanVien();
     Object.assign(newNhanVien, nhanVien);
-    console.log(newNhanVien);
-    console.log(nhanVien);
     content += `
     <tr>
 		<td>${newNhanVien.txtTaiKhoan}</td>
@@ -72,7 +75,7 @@ function renderNhanVien() {
         })" class="btn btn-danger">Xoá</button>
         <button id="btnSua" onclick="layThongTinNhanVien(${
           newNhanVien.txtTaiKhoan
-        })" class="btn btn-warning">Chỉnh sửa</button>
+        })" class="btn btn-warning">Sửa</button>
 	    </tr> `;
   }
   document.getElementById("tableDanhSach").innerHTML = content;
@@ -156,9 +159,9 @@ function capNhatThongTinNhanVien() {
       index = z;
     }
   }
-  if(valid) {
+  if (valid) {
     arrNhanVien[index] = nhanVien;
-    console.log(arrNhanVien[index])
+    console.log(arrNhanVien[index]);
     document.getElementById("formControl").reset();
     document.getElementById("txtTaiKhoan").readOnly = false;
     renderNhanVien();
@@ -167,5 +170,22 @@ function capNhatThongTinNhanVien() {
 }
 document.getElementById("btnCapNhat").onclick = capNhatThongTinNhanVien;
 
-
-
+//tìm kiếm nhân viên
+document.getElementById("btnTimNV").onclick = function () {
+  var tuKhoa = document.getElementById("searchName").value;
+  var newTuKhoa = tuKhoa.toLowerCase();
+  var arrSearch = [];
+  for (var i = 0; i < arrNhanVien.length; i++) {
+    var nhanVien = arrNhanVien[i];
+    // console.log(nhanVien);
+    var newNhanVien = new NhanVien();
+    Object.assign(newNhanVien, nhanVien);
+    console.log(newNhanVien);
+    var xepLoai = newNhanVien.xepLoai().toLowerCase();
+    // xepLoai.toLowerCase()
+    if (xepLoai.includes(newTuKhoa)) {
+      arrSearch.push(nhanVien);
+    }
+  }
+  renderNhanVien(arrSearch);
+};

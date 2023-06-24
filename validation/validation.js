@@ -95,3 +95,5 @@ function checkMoney(idInput,idThongBao) {
         return true;
     }
 }
+
+
