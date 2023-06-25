@@ -80,6 +80,14 @@ function renderNhanVien(arrNewNhanVien) {
   }
   document.getElementById("tableDanhSach").innerHTML = content;
 }
+//ẩn nút thêm người dùng 
+document.getElementById("btnThem").onclick = function() {
+  var btnCapNhat = document.getElementById("btnCapNhat");
+  btnCapNhat.style.display = "none" ;
+  var btnThemNV = document.getElementById("btnThemNV");
+  btnThemNV.style.display = "inline-block";
+}
+
 
 //--Xoá nhân viên----//
 function xoaNhanVien(taiKhoan) {
@@ -124,7 +132,8 @@ function layThongTinNhanVien(taiKhoan) {
   for (var z = 0; z < arrInput.length; z++) {
     document.getElementById(arrInput[z]).value = nhanVien[arrInput[z]];
   }
-  document.getElementById("btnThem").style.display = "inline-block";
+  document.getElementById("btnThemNV").style.display = "none"
+  document.getElementById("btnCapNhat").style.display = "inline-block";
   document.getElementById("myModal").classList.add("show");
   document.getElementById("myModal").style.display = "inline-block";
   document.getElementById("txtTaiKhoan").readOnly = true;
