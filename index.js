@@ -51,7 +51,7 @@ document.getElementById("btnThemNV").onclick = themNhanVien;
 //---render nhân viên ---//
 function renderNhanVien(arrNewNhanVien) {
   console.log(arrNewNhanVien);
-  if (arrNewNhanVien == undefined) {
+  if (arrNewNhanVien == undefined && arrNewNhanVien !== "") {
     arrNewNhanVien = arrNhanVien;
   }
 
