@@ -85,7 +85,7 @@ function checkGioLam(idInput, idThongBao) {
     }
 }
 function checkMoney(idInput,idThongBao) {
-    var regrexMoney = /^-?[0-9]+(\.[0-9]+)?$/;
+    var regrexMoney = /^(1\d{6}|[2-9]\d{6}|1[0-9]{7}|2[01][0-9]{7})$/;
     var valueInput = document.getElementById(idInput).value;
     if(!regrexMoney.test(valueInput) && valueInput !== "") {
         document.getElementById(idThongBao).innerHTML = "Nhập đúng số tiền lương cơ bản từ 1 triệu đến 20 triệu";
