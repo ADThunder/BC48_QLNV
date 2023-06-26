@@ -62,7 +62,7 @@ function checkPassword(idInput, idThongBao) {
 }
 //check định dạng ngày tháng
 function checkNgayThang(idInput, idThongBao) {
-    var regrexNgayThang = /^\d{2}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/ ;
+    var regrexNgayThang = /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/ ;
     var valueInput = document.getElementById(idInput).value ;
     if(!regrexNgayThang.test(valueInput) && valueInput !== "") {
         document.getElementById(idThongBao).innerHTML = "Nhập đúng định dạng yy/mm/dd" ;
